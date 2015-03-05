@@ -11,34 +11,84 @@ import Foundation
 
 class Player{
     
-    var hand:[Int]=[]
-    var balance:Int
-    var bet:Int
-    var sum:Int{
-        get{
-            var temp:Int = 0
-            for i in 1...hand.count
-            {
-                temp = temp + hand[i-1]
-            }
-            return temp
-        }
-        set{
-            
-        }
-    }
+    var balance : Int;
     
+    var playerCards : [Int]
+    
+    var playerStatus : PlayerStatus
+    
+    var playerBet : Int = 0
     
     init(){
-        balance=100
-        bet=0
-        sum=0
-        hand.append(Singleton.getObject.globalDeck.removeAtIndex(0))
-        hand.append(Singleton.getObject.globalDeck.removeAtIndex(0))
+        playerBet = 0
+        playerCards = []
+        playerStatus = PlayerStatus.Statue
+        balance = 100
+    }
+    
+    func initializePlayer(){
+        let shoe = Shoe()
+        playerCards.append(shoe.getCardFromShoe())
+        playerCards.append(shoe.getCardFromShoe())
+    }
+    
+    var playerSum : Int {
+        get{
+            //Logic to get Ace as 1 or 11 is implemented below .
+            var temp : Int = 0
+            var acePresent:Bool = false
+            for card in playerCards {
+                temp += card
+            }
+            return temp
+        }set{
+            self.playerSum = newValue
+        }
+    }
+
+
+    
+    func isBlackJack() -> Bool {
+        var temp = playerSum
+        if  temp == 21 {
+            return true
+        }
+        return false
+    }
+    
+    func isBusted() -> Bool {
+        var temp = playerSum
+        
+        if temp > 21 {
+            return true
+        }
+        return false
+        
+    
     }
     
     
-    
-    
-    
+    func getStringOfCards(cardsInHand :[Int]) -> String {
+        if(cardsInHand.count==0){
+            return ""
+        }
+        var temp = ""
+        if(cardsInHand[0]==1){
+            var tempString = String(cardsInHand[0])+" ACE"
+        }else{
+            temp = String(cardsInHand[0])
+        }
+        
+        if(cardsInHand.count>1){
+            for i in 2...cardsInHand.count{
+                if(cardsInHand[i-1]==1){
+                    temp = temp + " : " + String(cardsInHand[i-1])+" ACE"
+                }else{
+                    temp = temp + " : " + String(cardsInHand[i-1])
+                }
+            }
+        }
+        return temp
+    }
+
 }

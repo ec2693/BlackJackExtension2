@@ -13,6 +13,8 @@ class Singleton {
     
     var numberOfDecks:Int = 0
     
+    var initialBalance:Double = 0
+    
     var globalDeck:[Int] = []
     
      class var getObject: Singleton {
@@ -22,3 +24,4 @@ class Singleton {
         return Static.instance
     }
 }
+

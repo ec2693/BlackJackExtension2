@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		261ED1C31AA6A1F900A600D9 /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 261ED1C21AA6A1F900A600D9 /* Deck.swift */; };
 		262199AE1AA6983000EA4E4E /* Deck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262199AD1AA6983000EA4E4E /* Deck.swift */; };
 		262199B01AA6986A00EA4E4E /* Shoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262199AF1AA6986A00EA4E4E /* Shoe.swift */; };
 		262199B21AA698A700EA4E4E /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262199B11AA698A700EA4E4E /* Player.swift */; };
 		262199B41AA698C400EA4E4E /* Dealer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262199B31AA698C400EA4E4E /* Dealer.swift */; };
 		262199B61AA6994200EA4E4E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 262199B51AA6994200EA4E4E /* ViewController.swift */; };
+		2695B0DA1AA7DEB0003632A7 /* PlayerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2695B0D91AA7DEB0003632A7 /* PlayerStatus.swift */; };
 		26C0FD321AA5757800B92B63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26C0FD311AA5757800B92B63 /* AppDelegate.swift */; };
 		26C0FD391AA5757800B92B63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26C0FD381AA5757800B92B63 /* Images.xcassets */; };
 		26C0FD3C1AA5757800B92B63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26C0FD3A1AA5757800B92B63 /* LaunchScreen.xib */; };
@@ -58,12 +58,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		261ED1C21AA6A1F900A600D9 /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		262199AD1AA6983000EA4E4E /* Deck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Deck.swift; sourceTree = "<group>"; };
 		262199AF1AA6986A00EA4E4E /* Shoe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Shoe.swift; path = ../Shoe.swift; sourceTree = "<group>"; };
 		262199B11AA698A700EA4E4E /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = ../Player.swift; sourceTree = "<group>"; };
 		262199B31AA698C400EA4E4E /* Dealer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dealer.swift; path = ../Dealer.swift; sourceTree = "<group>"; };
 		262199B51AA6994200EA4E4E /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
+		2695B0D91AA7DEB0003632A7 /* PlayerStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerStatus.swift; path = ../PlayerStatus.swift; sourceTree = "<group>"; };
 		26C0FD2C1AA5757800B92B63 /* BlackJackExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlackJackExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26C0FD301AA5757800B92B63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		26C0FD311AA5757800B92B63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -152,6 +152,7 @@
 				262199AC1AA6974800EA4E4E /* HelpFiles */,
 				26C0FD5F1AA57CD300B92B63 /* Spring */,
 				26C0FD591AA579B400B92B63 /* Main.storyboard */,
+				2695B0D91AA7DEB0003632A7 /* PlayerStatus.swift */,
 				262199B51AA6994200EA4E4E /* ViewController.swift */,
 				26C0FD5B1AA57B1400B92B63 /* Singleton.swift */,
 				262199B11AA698A700EA4E4E /* Player.swift */,
@@ -176,7 +177,6 @@
 		26C0FD441AA5757800B92B63 /* BlackJackExtensionTests */ = {
 			isa = PBXGroup;
 			children = (
-				261ED1C21AA6A1F900A600D9 /* Deck.swift */,
 				26C0FD471AA5757800B92B63 /* BlackJackExtensionTests.swift */,
 				26C0FD451AA5757800B92B63 /* Supporting Files */,
 			);
@@ -329,6 +329,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				26C0FD891AA57CD300B92B63 /* SoundPlayer.swift in Sources */,
+				2695B0DA1AA7DEB0003632A7 /* PlayerStatus.swift in Sources */,
 				26C0FD7D1AA57CD300B92B63 /* DesignableImageView.swift in Sources */,
 				26C0FD8F1AA57CD300B92B63 /* SpringTextField.swift in Sources */,
 				26C0FD5C1AA57B1400B92B63 /* Singleton.swift in Sources */,
@@ -366,7 +367,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				261ED1C31AA6A1F900A600D9 /* Deck.swift in Sources */,
 				26C0FD481AA5757800B92B63 /* BlackJackExtensionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

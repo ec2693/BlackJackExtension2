@@ -10,36 +10,45 @@ import Foundation
 
 class Shoe{
     
-    var shoe:[Int] = []
+    var Shoe:[Int] = []
     
-    func createDeck(var numberOfDecks: Int){
+    var singleton = Singleton.getObject
+    
+    func createShoe(var numberOfDecksInShoe: Int){
         var suits=["Spades","Diamonds","Hearts","Clubs"]
         var cards=[1,2,3,4,5,6,7,8,9,10,10,10,10]
         
-        for i in 1...numberOfDecks{
+        for i in 1...numberOfDecksInShoe{
             for suit in suits{
                 for card in cards{
-                    shoe.append(card)
+                    Shoe.append(card)
                 }
             }
         }
         shuffle()
-        Singleton.getObject.globalDeck=shoe
+        Singleton.getObject.globalDeck=Shoe
         
     }
     
+    func getCardFromShoe() -> Int {
+        return Singleton.getObject.globalDeck.removeAtIndex(0)
+    }
+
+    
     func shuffle() {
         var temp: Int
-        for i in 0...(shoe.count-1) {
-            let j = Int(arc4random_uniform(UnicodeScalarValue(shoe.count)))
+        for i in 0...(Shoe.count-1) {
+            let j = Int(arc4random_uniform(UnicodeScalarValue(Shoe.count)))
             println(j)
-            temp = shoe[i]
+            temp = Shoe[i]
             println(i,j)
-            shoe[i]=shoe[j]
-            shoe[j]=temp
+            Shoe[i]=Shoe[j]
+            Shoe[j]=temp
             
         }
+        
     }
+    
     
     
 }
