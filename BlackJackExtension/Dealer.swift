@@ -11,19 +11,19 @@ import Foundation
 class Dealer{
     
     
-    var dealerHand:[Int]
+    var dealerCards:[Int]
     
     let shoe:Shoe
     
     init(){
-        dealerHand = []
+        dealerCards = []
         shoe = Shoe()
     }
     
     var dealerSum : Int {
         get{
             var tempSum : Int = 0
-            for card in dealerHand {
+            for card in dealerCards {
                 tempSum += card
             }
             return tempSum
@@ -33,8 +33,8 @@ class Dealer{
     }
     
     func initializeDealer(){
-        dealerHand.append(shoe.getCardFromShoe())
-        dealerHand.append(shoe.getCardFromShoe())
+        dealerCards.append(shoe.getCardFromShoe())
+        dealerCards.append(shoe.getCardFromShoe())
     }
     func isBusted() -> Bool {
         var tempCount = dealerSum

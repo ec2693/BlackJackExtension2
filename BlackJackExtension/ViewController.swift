@@ -40,6 +40,8 @@ class ViewController: UIViewController {
     
     var dealer  = Dealer()
     
+    //var players = Player()
+    
     var numberOfGames = 5
     
     var numberOfPlayers :Int = 2
@@ -57,10 +59,37 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func deal(sender: UIButton) {
+        
+        //clearScreen()
+        
+        
+        if numberOfGames%5 == 0 {
+            shoe.createShoe(numberOfDecksInShoe)
+        }
+        dealer.initializeDealer()
+        numberOfGames++;
+        for i in 1...numberOfPlayers {
+            initialize(i)
+            println(i)
+            //var player = playerList[i-1]
+            
+            //validations(playerList[i-1])
+        }
+        println(playerList[0])
+        display()
+    }
+    
+    
+    
+    
     @IBAction func hit(sender: UIButton) {
         for i in 1...numberOfPlayers{
+            //println(playerList[i]);
             var player = playerList[i-1]
-            if(player.playerStatus == PlayerStatus.Turn){
+            
+            if(playerList[i-1].playerStatus == PlayerStatus.Turn){
+                println("insideHit")
                 player.playerCards.append(shoe.getCardFromShoe())
                 if(player.playerSum == 21){
                     playerList[i-1].playerStatus = PlayerStatus.BlackJack
@@ -70,15 +99,18 @@ class ViewController: UIViewController {
                     }
                     return
                 }else if(player.playerSum>21){
+                    println("isBusted")
                     playerList[i-1].playerStatus = PlayerStatus.Busted
                     display()
                     if(i != numberOfPlayers){
                         playerList[i].playerStatus = PlayerStatus.Turn
                     }else if (i == numberOfPlayers){
                         dealerChance()
+                        
                     }
                     return
                 }
+                println(playerList[0])
                 display()
             }
         }
@@ -110,38 +142,65 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBAction func deal(sender: UIButton) {
-        clearScreen()
-        
-        
-        if numberOfGames%5 == 0 {
-            shoe.createShoe(numberOfDecksInShoe)
+    
+    func clearScreen() {
+        for i in 1...4{
+            playerList = []
+            getCurrentPlayer(i).text = ""
+            dealerCards.text = ""
+            dealer = Dealer()
+            
         }
-        dealer.initializeDealer()
-        numberOfGames++;
-        for i in 1...numberOfPlayers {
-            initialize()
-            validations(playerList[i-1])
-        }
-        display()
         
+    }
+    
+    func getCurrentPlayer(index : Int) -> UILabel {
+        switch index{
+        case 1:
+            return cards1
+        case 2:
+            return cards2
+        case 3:
+            return cards3
+        case 4:
+            return cards4
+            
+        default:
+            return cards1
+        }
     }
     
     
     
-    func initialize(){
-        for i in 1...numberOfPlayers {
-            var player = Player()
-            player.initializePlayer()
-            player.playerBet = getPlayerBet(i-1)
-            if(i==1){
-                player.playerStatus = PlayerStatus.Turn
-            }else{
-                player.playerStatus = PlayerStatus.Statue
-            }
-            playerList.append(player)
+    
+    
+    func initialize(i:Int){
+        // for i in 1...numberOfPlayers {
+        var players = Player()
+        players.initializePlayer()
+        players.playerBet = getPlayerBet(i-1)
+        if(i==1){
+            println(" inside initialze \(i)")
+            players.playerStatus = PlayerStatus.Turn
+        }else{
+            players.playerStatus = PlayerStatus.Statue
+        }
+        playerList.append(players)
+        //}
+    }
+    
+    
+    
+    func validations(var player : Player) {
+        if(player.isBlackJack()){
+            changeBalance(player,isPlayerWon : true)
+        }else if(player.isBusted()){
+            changeBalance(player,isPlayerWon : false)
         }
     }
+    
+    
+    
     
     func getPlayerBet(index : Int) -> Int {
         switch index{
@@ -160,34 +219,13 @@ class ViewController: UIViewController {
     }
     
     
-    func getCurrentPlayer(index : Int) -> UILabel {
-        switch index{
-        case 1:
-            return cards1
-        case 2:
-            return cards2
-        case 3:
-            return cards3
-        case 4:
-            return cards4
-            
-        default:
-            return cards1
-        }
-    }
     
-    func displayDealer(var showFullCards : Bool){
-        var dealerHand = dealer.dealerHand
-        
-        if(!showFullCards){
-            dealerCards.text = "X"
+    func changeBalance(var player : Player , var isPlayerWon : Bool) {
+        if(isPlayerWon){
+            player.balance = player.balance + player.playerBet
         }else{
-            dealerCards.text = String(dealerHand[0])
+            player.balance = player.balance - player.playerBet
         }
-        for var i = dealerHand.count ; i>0 ; i-- {
-            dealerCards.text = dealerCards.text! + " , " + String(dealerHand[i-1])
-        }
-        
     }
     
     
@@ -198,8 +236,8 @@ class ViewController: UIViewController {
         state.text = ""
         for i = numberOfPlayers; i > 0; i-- {
             var player = playerList[i-1]
-            var currentHand = getCurrentPlayer(i)
-            currentHand.text = player.getStringOfCards(player.playerCards)
+            var currentPlayer = getCurrentPlayer(i)
+            currentPlayer.text = player.getStringOfCards(player.playerCards)
             balance.text = balance.text! + String(index) + ": " + String(playerList[i-1].balance) + " , "
             if(player.playerStatus == PlayerStatus.BlackJack || player.playerStatus == PlayerStatus.Busted ||
                 player.playerStatus == PlayerStatus.Turn || player.playerStatus == PlayerStatus.Stand){
@@ -207,43 +245,25 @@ class ViewController: UIViewController {
             }
             index = index+1
         }
+        println(cards1.text)
+        println(cards2.text)
         displayDealer(false)
     }
     
     
-    func clearScreen() {
-        for i in 1...4{
-            playerList = []
-            getCurrentPlayer(i).text = ""
-            dealerCards.text = ""
-            dealer = Dealer()
-            
-        }
-        
-    }
-    
-    
-    
-    func validations(var player : Player) {
-        if(player.isBlackJack()){
-            changeBalance(player,isPlayerWon : true)
-        }else if(player.isBusted()){
-            changeBalance(player,isPlayerWon : false)
-        }
-    }
     
     
     func dealerChance() {
         
         while(dealer.dealerSum<16){
-            dealer.dealerHand.append(shoe.getCardFromShoe())
+            dealer.dealerCards.append(shoe.getCardFromShoe())
         }
         println("dealer Card sum after stand \(dealer.dealerSum)")
-        println("dealer Cards \(dealer.dealerHand)")
-        var dealerSum = dealer.dealerSum
+        println("dealer Cards \(dealer.dealerCards)")
+        var dealer_sum = dealer.dealerSum
         for player in playerList{
             
-            if(dealerSum > 21){
+            if(dealer_sum > 21){
                 //Loop through all Players and check each status .
                 if(player.playerStatus == PlayerStatus.Stand){
                     player.playerStatus = PlayerStatus.Won
@@ -252,10 +272,10 @@ class ViewController: UIViewController {
                 continue
             }
             
-            if(dealerSum > player.playerSum && player.playerStatus == PlayerStatus.Stand){
+            if(dealer_sum > player.playerSum && player.playerStatus == PlayerStatus.Stand){
                 player.playerStatus =  PlayerStatus.Lost
                 changeBalance(player,isPlayerWon : false)
-            }else if dealerSum < player.playerSum && player.playerStatus == PlayerStatus.Stand {
+            }else if dealer_sum < player.playerSum && player.playerStatus == PlayerStatus.Stand {
                 player.playerStatus =  PlayerStatus.Won
                 changeBalance(player,isPlayerWon : true)
             }else{
@@ -268,13 +288,23 @@ class ViewController: UIViewController {
         display()
     }
     
-    func changeBalance(var player : Player , var isPlayerWon : Bool) {
-        if(isPlayerWon){
-            player.balance = player.balance + player.playerBet
+    func displayDealer(var showFullCards : Bool){
+        var dealer_card = dealer.dealerCards
+        
+        if(!showFullCards){
+            dealerCards.text = "X"
         }else{
-            player.balance = player.balance - player.playerBet
+            dealerCards.text = String(dealer_card[0])
         }
+        for var i = dealer_card.count ; i>0 ; i-- {
+            dealerCards.text = dealerCards.text! + " , " + String(dealer_card[i-1])
+        }
+        
     }
+    
+    
+    
+    
     
 }
 

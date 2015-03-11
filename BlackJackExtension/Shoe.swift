@@ -12,7 +12,7 @@ class Shoe{
     
     var Shoe:[Int] = []
     
-    var singleton = Singleton.getObject
+   // var singleton = Singleton.getObject
     
     func createShoe(var numberOfDecksInShoe: Int){
         var suits=["Spades","Diamonds","Hearts","Clubs"]
